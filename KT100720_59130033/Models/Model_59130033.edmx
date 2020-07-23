@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KT100720_59130033Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LOAITS">
+          <Key>
+            <PropertyRef Name="MaLTS" />
+          </Key>
+          <Property Name="MaLTS" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenLTS" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAISAN">
+          <Key>
+            <PropertyRef Name="MaTS" />
+          </Key>
+          <Property Name="MaTS" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenTS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DVT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="XuatXu" Type="bit" />
+          <Property Name="DonGia" Type="int" Nullable="false" />
+          <Property Name="AnhMH" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaLTS" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TAISAN__MaLTS__1367E606">
+          <End Role="LOAITS" Type="Self.LOAITS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TAISAN" Type="Self.TAISAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITS">
+              <PropertyRef Name="MaLTS" />
+            </Principal>
+            <Dependent Role="TAISAN">
+              <PropertyRef Name="MaLTS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="TaiSan_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaTS" Type="varchar" Mode="In" />
+          <Parameter Name="TenTS" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="KT100720_59130033ModelStoreContainer">
+          <EntitySet Name="LOAITS" EntityType="Self.LOAITS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAISAN" EntityType="Self.TAISAN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TAISAN__MaLTS__1367E606" Association="Self.FK__TAISAN__MaLTS__1367E606">
+            <End Role="LOAITS" EntitySet="LOAITS" />
+            <End Role="TAISAN" EntitySet="TAISAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KT100720_59130033Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LOAIT">
+          <Key>
+            <PropertyRef Name="MaLTS" />
+          </Key>
+          <Property Name="MaLTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenLTS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TAISANs" Relationship="Self.FK__TAISAN__MaLTS__1367E606" FromRole="LOAITS" ToRole="TAISAN" />
+        </EntityType>
+        <EntityType Name="TAISAN">
+          <Key>
+            <PropertyRef Name="MaTS" />
+          </Key>
+          <Property Name="MaTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenTS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XuatXu" Type="Boolean" />
+          <Property Name="DonGia" Type="Int32" Nullable="false" />
+          <Property Name="AnhMH" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaLTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LOAIT" Relationship="Self.FK__TAISAN__MaLTS__1367E606" FromRole="TAISAN" ToRole="LOAITS" />
+        </EntityType>
+        <Association Name="FK__TAISAN__MaLTS__1367E606">
+          <End Role="LOAITS" Type="Self.LOAIT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TAISAN" Type="Self.TAISAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITS">
+              <PropertyRef Name="MaLTS" />
+            </Principal>
+            <Dependent Role="TAISAN">
+              <PropertyRef Name="MaLTS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KT100720_59130033Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LOAITS" EntityType="Self.LOAIT" />
+          <EntitySet Name="TAISANs" EntityType="Self.TAISAN" />
+          <AssociationSet Name="FK__TAISAN__MaLTS__1367E606" Association="Self.FK__TAISAN__MaLTS__1367E606">
+            <End Role="LOAITS" EntitySet="LOAITS" />
+            <End Role="TAISAN" EntitySet="TAISANs" />
+          </AssociationSet>
+          <FunctionImport Name="TaiSan_TimKiem">
+            <Parameter Name="MaTS" Mode="In" Type="String" />
+            <Parameter Name="TenTS" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KT100720_59130033ModelStoreContainer" CdmEntityContainer="KT100720_59130033Entities">
+          <EntitySetMapping Name="LOAITS">
+            <EntityTypeMapping TypeName="KT100720_59130033Model.LOAIT">
+              <MappingFragment StoreEntitySet="LOAITS">
+                <ScalarProperty Name="MaLTS" ColumnName="MaLTS" />
+                <ScalarProperty Name="TenLTS" ColumnName="TenLTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAISANs">
+            <EntityTypeMapping TypeName="KT100720_59130033Model.TAISAN">
+              <MappingFragment StoreEntitySet="TAISAN">
+                <ScalarProperty Name="MaTS" ColumnName="MaTS" />
+                <ScalarProperty Name="TenTS" ColumnName="TenTS" />
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="AnhMH" ColumnName="AnhMH" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaLTS" ColumnName="MaLTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TaiSan_TimKiem" FunctionName="KT100720_59130033Model.Store.TaiSan_TimKiem" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
