@@ -21,7 +21,7 @@ namespace KT100720_59130033.Controllers
             return View(tAISANs.ToList());
         }
 
-        // GET: TaiSan_59130033/Details/5
+        // GET: TaiSan_59130033/Details/5/123
         public ActionResult Details(string id)
         {
             if (id == null)
